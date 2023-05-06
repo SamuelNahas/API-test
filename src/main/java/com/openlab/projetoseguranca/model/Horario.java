@@ -23,9 +23,8 @@ public class Horario {
     private int tempo_fim;
 
     @ManyToOne
-    @JoinColumn(name = "disciplinca_id")
+    @JoinColumn(name = "disciplina_id")
     private Disciplina disciplina;
-
 
     public Long getId() {
         return id;

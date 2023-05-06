@@ -4,11 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import java.util.List;
+import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -24,13 +24,8 @@ public class Usuario {
 
     private String cargo;
 
-    @ManyToMany
-    @JoinTable(name = "ocorrencia_usuario",
-    joinColumns = 
-        @JoinColumn (name = "usuario_id", referencedColumnName = "id"),
-    inverseJoinColumns = 
-        @JoinColumn(name = "ocorrencia_id", referencedColumnName = "id")
-    )
+    @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
     private List<Ocorrencia> ocorrencias;
 
     public List<Ocorrencia> getOcorrencias() {

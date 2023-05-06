@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openlab.projetoseguranca.model.Estudante;
 import com.openlab.projetoseguranca.repository.EstudanteRepository;
+import com.openlab.projetoseguranca.service.UsuarioService;
 
 @RestController
 @RequestMapping("/estudante")
@@ -18,6 +19,9 @@ public class EstudanteController {
 
     @Autowired
     private EstudanteRepository estudanteRepository;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @PostMapping("/salvar")
     public Estudante salvar(@RequestBody Estudante estudante) {
@@ -27,6 +31,11 @@ public class EstudanteController {
     @GetMapping("/listar")
     public List<Estudante> listar() {
         return estudanteRepository.findAll();
+    }
+    
+    @PostMapping("/buscar")
+    public List<Estudante> buscarEstudante(@RequestBody Estudante estudante) {
+        return usuarioService.listarEstudantesCoordencao(estudante);
     }
 
 }

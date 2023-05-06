@@ -7,4 +7,5 @@ import com.openlab.projetoseguranca.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+  public Usuario findByCodigo(String codigo);
 }

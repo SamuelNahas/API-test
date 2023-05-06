@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Responsavel {
     @Id
@@ -19,6 +21,7 @@ public class Responsavel {
     private String telefone;
 
     @OneToMany(mappedBy = "responsavel")
+    @JsonIgnore
     private List<Estudante> estudantes;
 
     public Long getId() {

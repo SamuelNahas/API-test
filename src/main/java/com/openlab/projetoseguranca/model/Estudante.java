@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Estudante {
 
@@ -36,6 +38,10 @@ public class Estudante {
     @OneToMany(mappedBy = "estudante")
     private List<Registro> registros;
 
+    @OneToMany(mappedBy = "estudante")
+    @JsonIgnore
+    private List<Ocorrencia> ocorrencias;
+
     @ManyToMany
     @JoinTable(name = "disciplinaEstudante",
             joinColumns = @JoinColumn(name = "estudante_id"),
@@ -47,9 +53,6 @@ public class Estudante {
             joinColumns = @JoinColumn(name = "estudante_id"),
             inverseJoinColumns = @JoinColumn(name = "curso_id"))
     private List<Curso> cursos;
-
-    @OneToMany(mappedBy = "estudante")
-    private List<Ocorrencia> ocorrencias;
 
 
     public Responsavel getResponsavel() {

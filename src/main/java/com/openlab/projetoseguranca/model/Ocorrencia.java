@@ -1,7 +1,6 @@
 package com.openlab.projetoseguranca.model;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -11,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -20,6 +17,9 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize
 @Entity
 public class Ocorrencia {
     @Id
@@ -33,21 +33,20 @@ public class Ocorrencia {
 
     private String nome_usuario_relacionado;
 
-    private String tipo_ocorrencia;
+    private String relatorio;
+
+    private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estudante_id")
     private Estudante estudante;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "ocorrencia_usuario",
-            joinColumns = @JoinColumn(name = "ocorrencia_id"),
-            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-    private List<Usuario> usuarios;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ocorrencia_id")
+    private Usuario usuario;
 
     @OneToOne(mappedBy = "ocorrencia", cascade = CascadeType.ALL)
     private Advertencia advertencia;
-
 
     public Estudante getEstudante() {
         return estudante;
@@ -57,12 +56,12 @@ public class Ocorrencia {
         this.estudante = estudante;
     }
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Advertencia getAdvertencia() {
@@ -81,12 +80,12 @@ public class Ocorrencia {
         this.id = id;
     }
 
-    public String getTipo_ocorrencia() {
-        return tipo_ocorrencia;
+    public String getRelatorio() {
+        return relatorio;
     }
 
-    public void setTipo_ocorrencia(String tipo_ocorrencia) {
-        this.tipo_ocorrencia = tipo_ocorrencia;
+    public void setRelatorio(String relatorio) {
+        this.relatorio = relatorio;
     }
 
     public String getStatus() {
@@ -96,8 +95,6 @@ public class Ocorrencia {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    private String status;
 
     public String getNome_usuario_relacionado() {
         return nome_usuario_relacionado;
