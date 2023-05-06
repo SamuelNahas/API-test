@@ -55,7 +55,7 @@ public class OcorenciaController {
     }
 
     @GetMapping("/listar/{id}")
-    public Ocorrencia listarOcorrenciaPorIdEstudante(@RequestParam Long id){
+    public List<Ocorrencia> listarOcorrenciaPorIdEstudante(@RequestParam Long id){
     return ocorrenciaRepository.findByEstudante(estudanteRepository.findById(id).get());
     }
 
