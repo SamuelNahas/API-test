@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Horario {
 
@@ -24,6 +26,7 @@ public class Horario {
 
     @ManyToOne
     @JoinColumn(name = "disciplina_id")
+    @JsonIgnore
     private Disciplina disciplina;
 
     public Long getId() {
@@ -66,5 +69,12 @@ public class Horario {
         this.tempo_fim = tempo_fim;
     }
     
+    public Disciplina getDisciplina(){
+        return disciplina;
+    }
+
+    public void setDisciplina(Disciplina disciplina){
+        this.disciplina = disciplina;
+    }
     
 }

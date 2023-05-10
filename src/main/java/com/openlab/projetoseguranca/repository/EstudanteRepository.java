@@ -1,5 +1,6 @@
 package com.openlab.projetoseguranca.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +15,6 @@ public interface EstudanteRepository extends JpaRepository<Estudante, Long> {
 
     public Optional<Estudante> findByRa(String ra);
 
-    public Optional<Estudante> findByNome(String nome);
+    public List<Estudante> findByNomeContains(String nome);
 
 }

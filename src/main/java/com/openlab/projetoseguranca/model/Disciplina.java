@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Disciplina {
     
@@ -39,6 +41,7 @@ public class Disciplina {
         name = "disciplinaEstudante",
         joinColumns = @JoinColumn(name = "disciplina_id"),
         inverseJoinColumns = @JoinColumn(name = "estudante_id"))
+    @JsonIgnore
     private List<Estudante> estudantes;
 
     public Curso getCurso() {

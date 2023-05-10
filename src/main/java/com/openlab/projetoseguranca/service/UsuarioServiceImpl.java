@@ -1,6 +1,5 @@
 package com.openlab.projetoseguranca.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +15,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     private EstudanteRepository estudanteRepository;
 
     public List<Estudante> listarEstudantesCoordencao(Estudante estudante) {
-        List<Estudante> estudantes = new ArrayList<Estudante>();
+        List<Estudante> estudantes = estudanteRepository.findByNomeContains(estudante.getNome());
         if(estudanteRepository.findByRa(estudante.getRa()).isPresent()){
             estudantes.add(estudanteRepository.findByRa(estudante.getRa()).get());
         }
         if(estudanteRepository.findByCpf(estudante.getCpf()).isPresent()){
             estudantes.add(estudanteRepository.findByCpf(estudante.getCpf()).get());
-        }
-        if(estudanteRepository.findByNome(estudante.getNome()).isPresent()){
-            estudantes.add(estudanteRepository.findByNome(estudante.getNome()).get());
         }
         return estudantes;
     }
